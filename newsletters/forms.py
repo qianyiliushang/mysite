@@ -26,3 +26,9 @@ class SingUpForm(forms.ModelForm):
     def clean_full_name(self):
         full_name = self.cleaned_data.get('full_name')
         return full_name
+
+
+class ContactForm(forms.Form):
+    email = forms.EmailField(required=False)
+    full_name = forms.CharField()
+    message = forms.CharField()

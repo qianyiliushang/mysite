@@ -26,6 +26,9 @@ SECRET_KEY = '9qqj_f2&==a0f+8_)1!!a)m1os*&qda$13b@f+766+9+8q)rab'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+EMAIL_HOST = '172.21.11.10'
+EMAIL_PORT = '25'
+EMAIL_USE_TLS = True
 
 
 # Application definition
@@ -38,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newsletters',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,5 +103,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static", "my_static"),)
+MEDIA_URL = '/media_root/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
+
+CRISPY_TEMPLATE_PACK = "bootstrap3"
