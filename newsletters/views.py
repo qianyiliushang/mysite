@@ -22,16 +22,17 @@ def home(request):
         "form": form
     }
 
-    if form.is_valid:
+    if form.is_valid():
         instance = form.save(commit=False)
-        if not instance.full_name:
+        full_name = form.cleaned_data.get("full_name")
+        if not full_name:
             instance.full_name = "zombie"
         instance.save()
         # print instance.email
         # print instance.timestamp
-        # context = {
-        #     "title": "welcome back"
-        # }
+        context = {
+             "title": "welcome back"
+         }
     return render(request, "home.html", context)
 
 

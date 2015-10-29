@@ -1,18 +1,52 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block head_title %}Welcome | {{ block.super }} {% endblock %}
-{% block jumbotron %}
-    {{ block.super }}
-{% endblock %}
-{% block content %}
+
+
+
+{% block jumbotron_content %}
+
     <div class="row">
-        <div class="col-md-3">
-            <h1>{{ title }}</h1>
+        <div class="col-sm-6">
+            <h1>Hello Django</h1>
+
+            <p class="lead text-align-center">T产品数据需求今天汇总到乔丛，一起提给丁如虎。
+                H5通用转化需求+增量核心数据统计，周三评审+智能匹配TAD干预结果，周三评审。 明天都在产品内部评审
+                下午陪访家长。</p>
+
+            <p>
+                <a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
+            </p>
+        </div>
+        <div class="col-sm-6" style="background-color: black; height: 300px">
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-3 pull-right">
+            <p class="lead text-align-center">{{ title }}</p>
 
             <form method="POST" action="">{% csrf_token %}
                 {{ form|crispy }}
                 <input class="btn btn-primary" type="submit">
             </form>
+        </div>
+
+
+        <div class="col-sm-3">
+            <p class="lead text-align-center">Built with Bootstrap &amp; Django</p>
+        </div>
+        <div class="col-sm-3">
+            <p class="lead text-align-center">Created for all kinds of users</p>
+        </div>
+        <div class="col-sm-3">
+            <p class="lead text-align-center">Allways Open Source</p>
         </div>
     </div>
 
