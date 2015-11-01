@@ -20,17 +20,20 @@
 
 <!-- Static navbar -->
 {% include 'navbar.html' %}
+<style>
+    {% block style %}
+    {% endblock %}
+</style>
+
 
 {% comment %}{% verbatim %}{% endverbatim %}{% endcomment %}
 
 
+{% block jumbotron %}
+
+{% endblock %}
 <div class="container">
-    {% block jumbotron %}
-        <div class="jumbotron">
-            {% block jumbotron_content %}
-            {% endblock %}
-        </div>
-    {% endblock %}
+
     {% block content %}
     {% endblock %}
 </div>

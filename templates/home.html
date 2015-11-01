@@ -1,54 +1,106 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
+{% load staticfiles %}
 {% block head_title %}Welcome | {{ block.super }} {% endblock %}
+<style>
+    {% block style %}
+        .navbar-static-top {
+            margin-bottom: 0px !important;
+        }
+
+        .jumbotron {
+            background-color: #0E3D14;
+            color: #FFF;
+        }
+
+    {% endblock %}
+</style>
+
+{% block jumbotron %}
+    {% if request.user.is_authenticated %}
 
 
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1>Hello Django</h1>
 
-{% block jumbotron_content %}
+                        <p cla ss="lead text-align-center">T产品数据需求今天汇总到乔丛，一起提给丁如虎。
+                            H5通用转化需求+增量核心数据统计，周三评审+智能匹配TAD干预结果，周三评审。 明天都在产品内部评审
+                            下午陪访家长。</p>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Hello Django</h1>
-
-            <p class="lead text-align-center">T产品数据需求今天汇总到乔丛，一起提给丁如虎。
-                H5通用转化需求+增量核心数据统计，周三评审+智能匹配TAD干预结果，周三评审。 明天都在产品内部评审
-                下午陪访家长。</p>
-
-            <p>
-                <a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
-            </p>
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        {% comment %}<iframe src="http://www.tudou.com/programs/view/html5embed.action?type=1&code=VVoqDIARpGo&lcode=yDAr7mb13L8&resourceId=0_06_05_99"
+                            allowtransparency="true" allowfullscreen="true" allowfullscreenInteractive="true"
+                            scrolling="no" border="0" frameborder="0" style="width:480px;height:400px;"></iframe>{% endcomment %}
+                        <embed src="http://player.video.qiyi.com/ab961e01223f5182a7c835ac44fa9593/0/0/v_19rrkr65wg.swf-albumId=413202700-tvId=413202700-isPurchase=0-cnId=22"
+                               allowFullScreen="true" quality="high" width="480" height="350" align="middle"
+                               allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6" style="background-color: black; height: 300px">
-
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}
 
 
 {% block content %}
+    {% if request.user.is_authenticated %}
 
-    <div class="row">
-        <div class="col-sm-3 pull-right">
-            <p class="lead text-align-center">{{ title }}</p>
+        {% comment %}    <h1>你已登陆</h1>
+        {% if queryset %}
+            <h2>欢迎</h2>
+            <table class="table">
+                {% for instance in queryset %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td> {{ instance }}</td>
+                        <td> {{ instance.full_name }}</td>
+                        <td>{{ instance.timestamp|timesince }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
 
-            <form method="POST" action="">{% csrf_token %}
-                {{ form|crispy }}
-                <input class="btn btn-primary" type="submit">
-            </form>
+        {% endif %}{% endcomment %}
+    {% comment %}{% else %}{% endcomment %}
+
+        <div class="row">
+            <div class="col-sm-3 pull-right">
+                <p class="lead text-align-center">{{ title }}</p>
+
+                <form method="POST" action="">{% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-primary" type="submit">
+                </form>
+            </div>
+
+
+            <div class="col-sm-3">
+                <p class="lead text-align-center">Built with Bootstrap &amp; Django</p>
+                <img src="{% static 'img/beach.jpg' %}" class="img-responsive"/>
+            </div>
+            <div class="col-sm-3">
+                <p class="lead text-align-center">Created for all kinds of users<br>
+                <span class="fa-stack fa-lg fa-5x">
+                    <i class="fa fa-comment-o fa-stack-2x"></i>
+                    <i class="fa fa-bolt fa-stack-1x"></i>
+                </span>
+                </p>
+
+            </div>
+            <div class="col-sm-3">
+                <p class="lead text-align-center">Allways Open Source<br>
+              <span class="fa-stack fa-lg fa-5x">
+                <i style="color: blue" class="fa fa-github fa-2x"></i>
+                </span><br>
+                </p>
+            </div>
         </div>
-
-
-        <div class="col-sm-3">
-            <p class="lead text-align-center">Built with Bootstrap &amp; Django</p>
-        </div>
-        <div class="col-sm-3">
-            <p class="lead text-align-center">Created for all kinds of users</p>
-        </div>
-        <div class="col-sm-3">
-            <p class="lead text-align-center">Allways Open Source</p>
-        </div>
-    </div>
-
+    {% endif %}
 
 {% endblock %}

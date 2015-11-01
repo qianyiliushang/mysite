@@ -9,7 +9,7 @@ sys.setdefaultencoding('utf-8')
 # Create your models here.
 class SignUp(models.Model):
     def __str__(self):
-        return self.full_name
+        return self.email
 
     email = models.EmailField()
     full_name = models.CharField(max_length=120, blank=True, null=True)

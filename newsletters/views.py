@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .forms import SingUpForm, ContactForm
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import SignUp
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -31,12 +32,22 @@ def home(request):
         # print instance.email
         # print instance.timestamp
         context = {
-             "title": "welcome back"
-         }
+            "title": "welcome back"
+        }
+    if request.user.is_authenticated() and request.user.is_staff:
+        # print(SignUp.objects.all())
+        # for instance in SignUp.objects.all():
+        #     print(instance)
+        queryset = SignUp.objects.all().order_by('-timestamp').filter(email__icontains="changingedu")
+        context = {
+            "queryset": queryset
+        }
     return render(request, "home.html", context)
 
 
 def contact(request):
+    title = "联系我们"
+    title_align_center = True
     form = ContactForm(request.POST or None)
     if form.is_valid():
         for key in form.cleaned_data.iteritems():
@@ -50,6 +61,12 @@ def contact(request):
 
     context = {
         "form": form,
+        "title": title,
+        "title_align_center": title_align_center
     }
 
-    return render(request, "contact.html", context)
+    return render(request, "forms.html", context)
+
+
+def about(request):
+    return render(request, "about.html", {})

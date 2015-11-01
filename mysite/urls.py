@@ -21,7 +21,9 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'newsletters.views.home', name='home'),
-    url(r'^contact/$', 'newsletters.views.contact', name='contact')
+    url(r'^contact/$', 'newsletters.views.contact', name='contact'),
+    url(r'^about/$', 'mysite.views.about', name='about'),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
